@@ -25,6 +25,13 @@ class Session {
     }
 
     /**
+     * Length of the session in seconds
+     */
+    get length() {
+        return Math.round((+this.to - this.from) / 1000);
+    }
+
+    /**
      * Checks is the date covered by the session
      * @param {Date} date Date to check coverage
      * @param {Boolen} dailyPrecision Check only date, but not time
