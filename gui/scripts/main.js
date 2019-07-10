@@ -10,34 +10,61 @@ function main() {
         "sessions.json": "sessions"
     }, (data) => {
         initializeElements();
-    
-        i = 0;
-        //Iterate through all users in data
-        for (const id in data["sessions"]) {
-            const userData = data["sessions"][id];
-            //Create user object
-            let user = new User(userData.name, id);
-            //Add sessions
-            for (const session of userData.sessions) {
-                if (session.from !== undefined) {
-                    user.sessions.add(session.from, session.to, session.platform);
-                }
-            }
-            document.getElementsByClassName("users")[0].innerHTML +=
-                `<div class="button user" onclick="set(${i})">${userData.name}</div>`;
-            //Save user to an array
-            users.push(user);
-            i++;
-        }
-    
-        setupURLHash();    
+        parseData(data);
+        setupURLHash();
+        let canvas = document.getElementsByClassName("report-render")[0];
+        drawer = new Drawer(canvas, users[id]);
         renderUser();
     });
 }
 
+function parseData(data) {
+    i = 0;
+    //Iterate through all users in data
+    for (const id in data["sessions"]) {
+        const userData = data["sessions"][id];
+        //Create user object
+        let user = new User(userData.name, id);
+        //Add sessions
+        for (const session of userData.sessions) {
+            if (session.from !== undefined) {
+                user.addSession(
+                    new Session(session.from, session.to, session.platform)
+                );
+            }
+        }
+        //Add filters
+        let empty = new EmptyFilter("empty");
+        empty.toggle(false);
+        let device = new DeviceFilter("device");
+        let period = new PeriodFilter("period");
+        const days = Object.keys(user.days);
+        period.from = +days[0];
+        period.to = +days[days.length - 1];
+
+        user.addFilter(empty);
+        user.addFilter(device);
+        user.addFilter(period);
+        
+        //Save user to an array
+        users.push(user);
+        document.getElementsByClassName("users")[0].innerHTML +=
+            `<div class="button user" onclick="set(${i})">${userData.name}</div>`;
+        i++;
+    }
+}
+
 function initializeElements() {
     $(".area-slider").ionRangeSlider({
-        type: "double"
+        type: "double",
+        drag_interval: true,
+        grid: true,
+        prettify: (value) => {
+            let date = DateUtils.getDateFromGlobalDay(value).toString();
+            date = date.split(' ');
+            date = date[1] + " " + date[2];
+            return date;
+        }
     });
     $(".zoom-slider").ionRangeSlider({
         min: 0.8,
@@ -78,12 +105,14 @@ function setupURLHash() {
         }
 
         if (parameters["period"].split('-').length == 2) {
-            users[id].sessions.start = +parameters["period"].split('-')[0];
-            users[id].sessions.end = +users[id].sessions.days - parameters["period"].split('-')[1];
+            const days = Object.keys(users[id].days);
+            users[id].getFilter("period").from = +days[0] + (+parameters["period"].split('-')[0]) - 1;
+            users[id].getFilter("period").to = +days[0] + (+parameters["period"].split('-')[1]) - 1;
         }
     }
     else {
-        window.location.hash = "user:0,zoom:1,period:1-" + users[id].sessions.days;
+        const days = Object.keys(users[id].days);
+        window.location.hash = "user:0,zoom:1,period:1-" + days.length;
     }
 }
 
@@ -107,26 +136,35 @@ function set(i) {
 }
 
 function renderUser() {
-    let canvas = document.getElementsByClassName("report-render")[0];
+    //Get elements
     let range = $(".area-slider").data("ionRangeSlider");
+    //Update labels on the page
     document.getElementsByClassName("user-name")[0].innerHTML = users[id].name;
     document.getElementsByClassName("user-id")[0].innerHTML = users[id].id;
+    //Update URL location
     window.location.hash = window.location.hash.replace(/user:[0-9]+/, "user:" + id);
-    drawer = new Drawer(canvas, users[id].sessions);
+    //Render drawer object
+    drawer.user = users[id];
     drawer.render();
+    //Update range selector
+    const days = Object.keys(users[id].days);
+    const period = users[id].getFilter("period");
     range.update({
-        min: 1,
-        max: users[id].sessions.days,
-        from: users[id].sessions.start,
-        to: users[id].sessions.end,
+        min: days[0],
+        max: days[days.length - 1],
+        from: period.from,
+        to: period.to,
         onChange: function (data) {
-            window.location.hash = window.location.hash.replace(/period:[0-9\-]+/, "period:" + data.from + "-" + data.to);
-            let session = users[id].sessions;
-            session.start = data.from;
-            session.end = session.days - data.to;
+            period.from = data.from;
+            period.to = data.to;
+            window.location.hash = window.location.hash.replace(/period:[^,]+/,
+                "period:" + (period.from - days[0] + 1) + "-" + (period.to - days[0] + 1));
             drawer.render();
         }
     });
+    //Update filter hash
+    window.location.hash = window.location.hash.replace(/period:[^,]+/,
+        "period:" + (period.from - days[0] + 1) + "-" + (period.to - days[0] + 1));
 }
 
 function goToUser() {
