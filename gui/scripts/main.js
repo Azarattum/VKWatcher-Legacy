@@ -4,6 +4,8 @@ var drawer;
 var users = [];
 //Selected user id
 var id = 0;
+//URL hash object
+var hash = null;
 
 function main() {
     load({
@@ -72,7 +74,7 @@ function initializeElements() {
         step: 0.1,
         from: 1,
         onFinish: function (data) {
-            window.location.hash = window.location.hash.replace(/zoom:[0-9.]+/, "zoom:" + data.from);
+            hash.set("zoom", data.from);
             document.getElementsByClassName("page")[0].
             style.setProperty("--vertical-zoom", data.from);
             drawer.update();
@@ -86,33 +88,29 @@ function initializeElements() {
 }
 
 function setupURLHash() {
-    if (window.location.hash || window.location.hash.slice(1).split(',').length == 3) {
-        var parameters = {};
-        window.location.hash.slice(1).split(',').forEach(x => {
-            parameters[x.split(':')[0]] = x.split(':')[1];
-        });
+    const days = Object.keys(users[id].days);
+    hash = new Hash({
+        user: 0,
+        zoom: 1,
+        period: "1-" + days.length
+    });
 
-        if (Number.isInteger(+parameters["user"])) {
-            id = parameters["user"];
-        }
-
-        if (Number.isFinite(+parameters["zoom"])) {
-            $(".zoom-slider").data("ionRangeSlider").update({
-                from: +parameters["zoom"]
-            });
-            document.getElementsByClassName("page")[0].
-            style.setProperty("--vertical-zoom", +parameters["zoom"]);
-        }
-
-        if (parameters["period"].split('-').length == 2) {
-            const days = Object.keys(users[id].days);
-            users[id].getFilter("period").from = +days[0] + (+parameters["period"].split('-')[0]) - 1;
-            users[id].getFilter("period").to = +days[0] + (+parameters["period"].split('-')[1]) - 1;
-        }
+    if (Number.isInteger(+hash.get("user"))) {
+        id = +hash.get("user");
     }
-    else {
+
+    if (Number.isFinite(+hash.get("zoom"))) {
+        $(".zoom-slider").data("ionRangeSlider").update({
+            from: +hash.get("zoom")
+        });
+        document.getElementsByClassName("page")[0].
+        style.setProperty("--vertical-zoom", +hash.get("zoom"));
+    }
+
+    if (hash.exists("period") && hash.get("period").split('-').length == 2) {
         const days = Object.keys(users[id].days);
-        window.location.hash = "user:0,zoom:1,period:1-" + days.length;
+        users[id].getFilter("period").from = +days[0] + (+hash.get("period").split('-')[0]) - 1;
+        users[id].getFilter("period").to = +days[0] + (+hash.get("period").split('-')[1]) - 1;
     }
 }
 
@@ -142,8 +140,8 @@ function renderUser() {
     document.getElementsByClassName("user-name")[0].innerHTML = users[id].name;
     document.getElementsByClassName("user-id")[0].innerHTML = users[id].id;
     document.getElementById("empty-filter").checked = !users[id].getFilter("empty").enabled;
-    //Update URL location
-    window.location.hash = window.location.hash.replace(/user:[0-9]+/, "user:" + id);
+    //Update hash property
+    hash.set("user", id);
     //Render drawer object
     drawer.user = users[id];
     drawer.render();
@@ -158,14 +156,12 @@ function renderUser() {
         onChange: function (data) {
             period.from = data.from;
             period.to = data.to;
-            window.location.hash = window.location.hash.replace(/period:[^,]+/,
-                "period:" + (period.from - days[0] + 1) + "-" + (period.to - days[0] + 1));
+            hash.set("period", (period.from - days[0] + 1) + "-" + (period.to - days[0] + 1));
             drawer.render();
         }
     });
     //Update filter hash
-    window.location.hash = window.location.hash.replace(/period:[^,]+/,
-        "period:" + (period.from - days[0] + 1) + "-" + (period.to - days[0] + 1));
+    hash.set("period", (period.from - days[0] + 1) + "-" + (period.to - days[0] + 1));
 }
 
 function goToUser() {
