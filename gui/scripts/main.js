@@ -141,6 +141,7 @@ function renderUser() {
     //Update labels on the page
     document.getElementsByClassName("user-name")[0].innerHTML = users[id].name;
     document.getElementsByClassName("user-id")[0].innerHTML = users[id].id;
+    document.getElementById("empty-filter").checked = !users[id].getFilter("empty").enabled;
     //Update URL location
     window.location.hash = window.location.hash.replace(/user:[0-9]+/, "user:" + id);
     //Render drawer object
@@ -169,6 +170,13 @@ function renderUser() {
 
 function goToUser() {
     window.open("https://vk.com/id" + users[id].id, '_blank').focus();
+}
+
+function toggleEmptyFilter() {
+    users[id].getFilter("empty").toggle(
+        !document.getElementById("empty-filter").checked
+    );
+    drawer.render();
 }
 
 /**
