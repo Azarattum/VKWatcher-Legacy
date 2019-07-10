@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sessioner">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/rangeSlider.min.css">
+    <script src="libs/jquery.min.js"></script>
+    <script src="libs/rangeSlider.min.js"></script>
+    <script src="scripts/user.c.js"></script>
+    <script src="scripts/drawer.c.js"></script>
+    <script src="scripts/main.js"></script>
+    <title>VKW Interface</title>
+</head>
+<body onload="main()">
+    <div class="page">
+        <div class="report-window" ng-controller="report-controller">
+            <div class="report-header">
+                <div class="user-name"></div>
+                <div class="user-id" onclick="goToUser()"></div>
+                <div class="buttons">
+                    <div class="button range" onclick="">
+                        &#x2699;
+                        <div class="settings dropdown">
+                            <span class="label">Period:</span>
+                            <div class="period">
+                                <input type="text" class="area-slider" name="my_range" value=""/>
+                            </div>
+                            <span class="label">Zoom:</span>
+                            <div class="zoom">
+                                <input type="text" class="zoom-slider" name="my_range" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button menu" onclick="">
+                        &#9776;
+                        <div class="dropdown users">
+                        </div>
+                    </div>
+                    <div class="button previous" onclick="previous()">&#x25c0;</div>
+                    <div class="button next" onclick="next()">&#x25ba;</div>
+                </div>
+            </div>
+            <div class="report-items">
+                <div class="report">
+                    <div class="report-wrapper">
+                        <canvas class="report-render"></canvas>
+                        <div class="select">
+                            <div class="line"></div>
+                            <div class="time"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="legend">
+                    <span class="title">Legend</span>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

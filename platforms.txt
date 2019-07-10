@@ -1,0 +1,11 @@
+Platforms IDs from the official documentation.
+
+ID	Name		Description
+
+1	mobile		Mobile website version or unidentified mobile app
+2	iphone		Official app for iPhone
+3	ipad		Official app for iPad
+4	android		Official app for Android
+5	wphone		Official app for Windows Phone
+6	windows		Official app for Windows 8
+7	web		Full website version or unidentified apps 
