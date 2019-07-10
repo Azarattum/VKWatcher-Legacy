@@ -24,7 +24,7 @@ class DeviceFilter extends IFilter {
      */
     passSession(session, device = null) {
         device = device || this.device;
-        if (device === null) return true;
+        if (device === null || device === -1) return true;
         
         //Case when the device value is platform id
         if (Number.isFinite(device)) {

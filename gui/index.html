@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="sessioner">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +22,7 @@
     <script src="scripts/main.js"></script>
     <title>VKW Interface</title>
 </head>
+
 <body onload="main()">
     <div class="page">
         <div class="report-window" ng-controller="report-controller">
@@ -31,19 +33,31 @@
                     <div class="button range" onclick="">
                         &#x2699;
                         <div class="settings dropdown">
+                            <span class="label">Filters:</span>
+                            <div class="filters">
+                                <label class="empty-container" onclick="toggleEmptyFilter()">Empty
+                                    <input type="checkbox" id="empty-filter" checked="true">
+                                    <span class="empty-checkmark"></span>
+                                </label>
+                                <select class="device" onchange="changeDeviceFilter(this.value)">
+                                    <option value="-1" class="none">No Device Filter</option>
+                                    <option value="1" style="background-color:var(--color-mobile)">Mobile</option>
+                                    <option value="2" style="background-color:var(--color-iphone)">iPhone</option>
+                                    <option value="3" style="background-color:var(--color-ipad)">iPad</option>
+                                    <option value="4"style="background-color:var(--color-android)">Android</option>
+                                    <option value="5" style="background-color:var(--color-wphone)">WPhone</option>
+                                    <option value="6" style="background-color:var(--color-windows)">Windows</option>
+                                    <option value="7" style="background-color:var(--color-web)">Web</option>
+                                </select>
+                            </div>
                             <span class="label">Period:</span>
                             <div class="period">
-                                <input type="text" class="area-slider" name="my_range" value=""/>
+                                <input type="text" class="area-slider" name="my_range" value="" />
                             </div>
                             <span class="label">Zoom:</span>
                             <div class="zoom">
-                                <input type="text" class="zoom-slider" name="my_range" value=""/>
+                                <input type="text" class="zoom-slider" name="my_range" value="" />
                             </div>
-                            <span class="label">Filters:</span>
-                            <label class="empty-container" onclick="toggleEmptyFilter()">Empty
-                                <input type="checkbox" id="empty-filter" checked="true">
-                                <span class="empty-checkmark"></span>
-                            </label>
                         </div>
                     </div>
                     <div class="button menu" onclick="">
@@ -72,4 +86,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -92,7 +92,9 @@ function setupURLHash() {
     hash = new Hash({
         user: 0,
         zoom: 1,
-        period: "1-" + days.length
+        period: "1-" + days.length,
+        device: -1,
+        empty: true
     });
 
     if (Number.isInteger(+hash.get("user"))) {
@@ -105,6 +107,15 @@ function setupURLHash() {
         });
         document.getElementsByClassName("page")[0].
         style.setProperty("--vertical-zoom", +hash.get("zoom"));
+    }
+
+    if (hash.get("empty") === "false") {
+        users[id].getFilter("empty").toggle(true);
+        document.getElementById("empty-filter").checked = false;
+    }
+
+    if (Number.isInteger(+hash.get("device"))) {
+        users[id].getFilter("device").device = +hash.get("device");
     }
 
     if (hash.exists("period") && hash.get("period").split('-').length == 2) {
@@ -140,8 +151,11 @@ function renderUser() {
     document.getElementsByClassName("user-name")[0].innerHTML = users[id].name;
     document.getElementsByClassName("user-id")[0].innerHTML = users[id].id;
     document.getElementById("empty-filter").checked = !users[id].getFilter("empty").enabled;
+    document.getElementsByClassName("device")[0].value = users[id].getFilter("device").device || -1;
     //Update hash property
     hash.set("user", id);
+    hash.set("empty", !users[id].getFilter("empty").enabled);
+    hash.set("device", users[id].getFilter("device").device || -1);
     //Render drawer object
     drawer.user = users[id];
     drawer.render();
@@ -172,6 +186,13 @@ function toggleEmptyFilter() {
     users[id].getFilter("empty").toggle(
         !document.getElementById("empty-filter").checked
     );
+    hash.set("empty", document.getElementById("empty-filter").checked);
+    drawer.render();
+}
+
+function changeDeviceFilter(deviceId) {
+    users[id].getFilter("device").device = +deviceId;
+    hash.set("device", deviceId);
     drawer.render();
 }
 

@@ -236,7 +236,7 @@ body {
 }
 
 .empty-container {
-    display: block;
+    display: inline-block;
     position: relative;
     padding-left: 35px;
     margin-top: 4px;
@@ -295,4 +295,37 @@ body {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+}
+
+.device {
+    outline: none; 
+    float: right;
+    margin-top: 6px;
+    font-size: 0.6em;
+    font-family: Arial, Helvetica, sans-serif;
+    color:var(--color-text);
+    text-align: center;
+    border: 2px solid var(--color-text);
+    border-radius: 4px;
+    padding: 4px;
+    font-weight: bold;
+    background-color: #e1e4e9;
+    cursor: pointer;
+}
+
+.device:hover {
+    background-color: #ccc;
+}
+
+.device>option {
+    outline: none; 
+    color: white;
+}
+
+.device>.none {
+    color: rgb(63, 63, 63);
+}
+
+.filters {
+    margin-bottom: 4px;
 }
