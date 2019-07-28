@@ -126,9 +126,11 @@ class Drawer {
                     + hour / 60 * session.from.getMinutes()
                     + (hour / 60 / 60) * session.from.getSeconds();
 
-                const length = hour * 
+                let length = hour * 
                     ((session.to - session.from) / 1000 / 60 / 60);
                 
+                if (length < 1) length = 1;
+
                 ctx.fillStyle = styles.getPropertyValue("--color-" + session.device);
                 ctx.fillRect(x + (margin / 2), y, width - margin, length);
             }
