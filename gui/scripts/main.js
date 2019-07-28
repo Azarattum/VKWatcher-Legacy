@@ -69,9 +69,9 @@ function initializeElements() {
         }
     });
     $(".zoom-slider").ionRangeSlider({
-        min: 0.8,
-        max: 8,
-        step: 0.1,
+        min: 0.75,
+        max: 16,
+        step: 0.25,
         from: 1,
         onFinish: function (data) {
             hash.set("zoom", data.from);
