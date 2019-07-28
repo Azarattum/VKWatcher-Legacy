@@ -82,6 +82,10 @@ class Controller {
 
             const date = DateUtils.combineDate(day.date, controller.time);
             const session = day.getSession(date, true);
+            if (session === null) {
+                sessionBlock.style.opacity = 0;
+                return;
+            }
 
             const dateParts = date.toString().split(' ');
             sessionDate.innerText = dateParts[0] + ", " + dateParts[1] + " " + dateParts[2];

@@ -38,3 +38,20 @@ function changeDeviceFilter(deviceId) {
     hash.set("device", deviceId);
     drawer.render();
 }
+
+function tab(eventArgs, tabId) { 
+    //Hide all tabs
+    let tabcontents = document.getElementsByClassName("tabcontent");
+    for (const tab of tabcontents) {
+        tab.style.display = "none";
+    }
+  
+    //Remove all fills
+    let tablinks = document.getElementsByClassName("tablinks");
+    for (const link of tablinks) {
+        link.className = link.className.replace(" filled", "");
+    }
+
+    document.getElementById(tabId).style.display = "block";
+    eventArgs.currentTarget.className += " filled";
+  }

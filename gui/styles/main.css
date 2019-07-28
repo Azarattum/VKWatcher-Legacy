@@ -65,35 +65,6 @@ body {
     cursor: pointer;
 }
 
-.report-items {
-    display: flex;
-    flex-direction: row;
-}
-
-.report {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-}
-
-.report-wrapper {
-    display: inline-block;
-    width: 100%;
-    height: calc(100vh * var(--vertical-zoom) - 96px);
-    margin: 8px;
-    padding: 4px;
-    border-radius: 18px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-    overflow: hidden;
-    transform: translate(0, 0);
-}
-
-.report-render {
-    width: calc(100% - 8px * 2);
-    height: 100%;
-    color: var(--color-text);
-}
-
 .buttons {
     display: flex;
     width: min-content;
@@ -201,41 +172,6 @@ body {
     background: var(--color-text);
 }
 
-.select {
-    position: absolute;
-    width: 100vw;
-    top: -1px;
-    left: 0px;
-    z-index: 1000;
-    pointer-events: none;
-    opacity: 0.8;
-    transform: translate(0, 0);
-}
-
-.select>.line {
-    position: absolute;
-    top: 4px;
-
-    width: 200%;
-    height: 1px;
-    background-color: var(--color-text);
-    pointer-events: none;
-}
-
-.select>.time {
-    position: absolute;
-    top: 4px;
-    right: 0px;
-
-    color: var(--color-text);
-    font-size: 1.2em;
-    margin-right: 32px;
-    text-align: right;
-    pointer-events: none;
-    text-shadow: 0px 0px 4px white;
-    z-index: 3000;
-}
-
 .empty-container {
     display: inline-block;
     position: relative;
@@ -331,47 +267,19 @@ body {
     margin-bottom: 4px;
 }
 
-.session {
-    position: absolute;
-    width: max-content;
-    height: max-content;
-    top: 0;
-    left: 0;
-    padding: 16px;
+.tablinks {
+    position: relative;
+    margin-left: 16px;
+}
 
-    background-color: white;
-    border-radius: 9px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-    color: var(--color-text);
-
-    z-index: 2000;
-    pointer-events: none;
+.tab {
+    position: relative;
     transform: translate(0, 0);
+    overflow: hidden;
+    float: left;
+    width: 21px;
+    height: 21px;
+    margin-right: 16px;
 
-    opacity: 0;
-    transition: 0.1s;
-}
-
-.session>h2 {
-    margin-top: 0;
-}
-
-.session>p {
-    position: relative;
-    left: 16px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-}
-
-.session>table {
-    position: relative;
-    left: 16px;
-}
-
-.table-item {
-    width: 10em;
-}
-
-.session>.date {
-    opacity: 0.7;
+    cursor: pointer;
 }

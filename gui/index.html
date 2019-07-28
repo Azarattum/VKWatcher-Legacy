@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/overview.css">
+    <link rel="stylesheet" href="styles/icons.css">
     <link rel="stylesheet" href="styles/rangeSlider.min.css">
     <script src="libs/jquery.min.js"></script>
     <script src="libs/rangeSlider.min.js"></script>
@@ -73,7 +75,12 @@
                 </div>
             </div>
             <div class="report-items">
-                <div class="report">
+                <div class="tablinks">
+                    <div class="tab"><div class="tablinks icon overview filled" onclick="tab(event, 'overview')"></div></div>
+                    <div class="tab"><div class="tablinks icon chart" onclick="tab(event, 'chart')"><i></i></div></div>                    
+                    <div class="tab"><div class="tablinks icon analysis" onclick="tab(event, 'analysis')"></div></div>                    
+                </div>
+                <div class="overview tabcontent" id="overview">
                     <div class="report-wrapper">
                         <canvas class="report-render"></canvas>
                         <div class="select" style="top: -100px;">
@@ -91,6 +98,12 @@
                             </table>
                         </div>
                     </div>
+                </div>
+                <div class="chart tabcontent" id="chart"></div>
+
+                </div>
+                <div class="analysis tabcontent" id="analysis"></div>
+                
                 </div>
             </div>
         </div>
