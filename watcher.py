@@ -66,8 +66,12 @@ def get_offline(id):
     if int(response["online"]) == 1:
         return None
 
-    offline_time = int(response["last_seen"]["time"])
-    platform = int(response["last_seen"]["platform"])
+    if ("last_seen" in response):
+        offline_time = int(response["last_seen"]["time"])
+        platform = int(response["last_seen"]["platform"])
+    else:
+        offline_time = int(get_time())
+        platform = 0
 
     return (offline_time, platform)
 
@@ -144,6 +148,9 @@ while not exit:
                         if offline_time is not None:
                             data[id]["sessions"][-1]["to"] = offline_time[0]
                             data[id]["sessions"][-1]["platform"] = offline_time[1]
+                            #Normalize the date
+                            if (data[id]["sessions"][-1]["to"] <= data[id]["sessions"][-1]["from"]):
+                                data[id]["sessions"][-1]["from"] = int(data[id]["sessions"][-1]["to"]) - 15
                             data[id]["sessions"].append({})
                             log(prefix + "\033[1m" + data[id]["name"] + "\033[0m", "left \033[33moffline\033[0m.")
                             any_changes = True
