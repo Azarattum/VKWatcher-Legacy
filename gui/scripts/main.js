@@ -62,8 +62,8 @@ function renderUser() {
     //Get elements
     let range = $(".area-slider").data("ionRangeSlider");
     //Update labels on the page
-    document.getElementsByClassName("user-name")[0].innerHTML = users[id].name;
-    document.getElementsByClassName("user-id")[0].innerHTML = users[id].id;
+    document.getElementsByClassName("user-name")[0].innerText = users[id].name;
+    document.getElementsByClassName("user-id")[0].innerText = users[id].id;
     document.getElementById("empty-filter").checked = !users[id].getFilter("empty").enabled;
     document.getElementsByClassName("device")[0].value = users[id].getFilter("device").device || -1;
     //Update hash property

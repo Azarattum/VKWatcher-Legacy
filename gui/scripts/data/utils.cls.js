@@ -65,4 +65,30 @@ class DateUtils {
         const oneDay = 24*60*60*1000;
         return this.normalizeDateUp(new Date(oneDay*day));
     }
+
+    /**
+     * Combines the date from one date and the time from another
+     * @param {Date} dateDate A date for the date
+     * @param {Date} dateTime A date for the time
+     */
+    static combineDate(dateDate, dateTime) {
+        let date = new Date(+dateDate);
+        date.setHours(dateTime.getHours());
+        date.setMinutes(dateTime.getMinutes());
+        date.setSeconds(dateTime.getSeconds());
+        date.setMilliseconds(dateTime.getMilliseconds());
+        return date;
+    }
+
+    static getReadableDuration(dateFrom, dateTo) {
+        const duration = Math.round((dateTo - dateFrom) / 1000);
+        const hours = Math.floor(duration / 60 / 60);
+        const minutes = Math.floor((duration - (60 * 60 * hours)) / 60);
+        const seconds = Math.floor(duration - (60 * 60 * hours) - (60 * minutes));
+
+        const format = ((hours > 0) ? hours + " h, " : "") + 
+            ((minutes > 0) ? minutes + " min, " : "") + seconds + " sec";
+
+        return format;
+    }
 }

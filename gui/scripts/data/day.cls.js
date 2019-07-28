@@ -28,6 +28,35 @@ class Day {
 
         this.sessions.push(session);
     }
+
+    /**
+     * Gets the sesssion by the date
+     * @param {Date} date The date to seach
+     * @param {Boolean} approximately Search for the closest instead of covered
+     */
+    getSession(date, approximately = false) {
+        let closestSession = null;
+        let minTimeSpan = Infinity;
+
+        for (const session of this.sessions) {
+            if (session.isCovered(date, false)) {
+                return session;
+            }
+
+            if (approximately) {
+                const timeSpan = Math.min(
+                    Math.abs(session.from - date),
+                    Math.abs(session.to - date)
+                );
+                if (timeSpan < minTimeSpan) {
+                    minTimeSpan = timeSpan;
+                    closestSession = session;
+                }
+            }
+        }
+
+        return closestSession;
+    }
     
     /**
      * Returns a day with applied filter on sessions

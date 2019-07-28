@@ -233,6 +233,7 @@ body {
     text-align: right;
     pointer-events: none;
     text-shadow: 0px 0px 4px white;
+    z-index: 3000;
 }
 
 .empty-container {
@@ -328,4 +329,49 @@ body {
 
 .filters {
     margin-bottom: 4px;
+}
+
+.session {
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    top: 0;
+    left: 0;
+    padding: 16px;
+
+    background-color: white;
+    border-radius: 9px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    color: var(--color-text);
+
+    z-index: 2000;
+    pointer-events: none;
+    transform: translate(0, 0);
+
+    opacity: 0;
+    transition: 0.1s;
+}
+
+.session>h2 {
+    margin-top: 0;
+}
+
+.session>p {
+    position: relative;
+    left: 16px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.session>table {
+    position: relative;
+    left: 16px;
+}
+
+.table-item {
+    width: 10em;
+}
+
+.session>.date {
+    opacity: 0.7;
 }
