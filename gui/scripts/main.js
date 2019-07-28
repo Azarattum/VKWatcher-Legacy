@@ -1,21 +1,23 @@
-//Drawer object
-var drawer;
+/**
+ * Main script
+ */
+
 //Users array
 var users = [];
 //Selected user id
 var id = 0;
-//URL hash object
-var hash = null;
 
 function main() {
     load({
         "sessions.json": "sessions"
     }, (data) => {
-        initializeElements();
         parseData(data);
-        setupURLHash();
-        let canvas = document.getElementsByClassName("report-render")[0];
-        drawer = new Drawer(canvas, users[id]);
+        Designer.initialize();
+
+        const canvas = document.getElementsByClassName("report-render")[0];
+        window.drawer = new Drawer(canvas, users[id]);
+        window.controller = new Controller(drawer);
+
         renderUser();
     });
 }
@@ -56,94 +58,6 @@ function parseData(data) {
     }
 }
 
-function initializeElements() {
-    $(".area-slider").ionRangeSlider({
-        type: "double",
-        drag_interval: true,
-        grid: true,
-        prettify: (value) => {
-            let date = DateUtils.getDateFromGlobalDay(value).toString();
-            date = date.split(' ');
-            date = date[1] + " " + date[2];
-            return date;
-        }
-    });
-    $(".zoom-slider").ionRangeSlider({
-        min: 0.75,
-        max: 16,
-        step: 0.25,
-        from: 1,
-        onFinish: function (data) {
-            hash.set("zoom", data.from);
-            document.getElementsByClassName("page")[0].
-            style.setProperty("--vertical-zoom", data.from);
-            drawer.update();
-            drawer.render();
-        }
-    });
-    window.onresize = () => {
-        drawer.update();
-        drawer.render();
-    };
-}
-
-function setupURLHash() {
-    const days = Object.keys(users[id].days);
-    hash = new Hash({
-        user: 0,
-        zoom: 1,
-        period: "1-" + days.length,
-        device: -1,
-        empty: true
-    });
-
-    if (Number.isInteger(+hash.get("user"))) {
-        id = +hash.get("user");
-    }
-
-    if (Number.isFinite(+hash.get("zoom"))) {
-        $(".zoom-slider").data("ionRangeSlider").update({
-            from: +hash.get("zoom")
-        });
-        document.getElementsByClassName("page")[0].
-        style.setProperty("--vertical-zoom", +hash.get("zoom"));
-    }
-
-    if (hash.get("empty") === "false") {
-        users[id].getFilter("empty").toggle(true);
-        document.getElementById("empty-filter").checked = false;
-    }
-
-    if (Number.isInteger(+hash.get("device"))) {
-        users[id].getFilter("device").device = +hash.get("device");
-    }
-
-    if (hash.exists("period") && hash.get("period").split('-').length == 2) {
-        const days = Object.keys(users[id].days);
-        users[id].getFilter("period").from = +days[0] + (+hash.get("period").split('-')[0]) - 1;
-        users[id].getFilter("period").to = +days[0] + (+hash.get("period").split('-')[1]) - 1;
-    }
-}
-
-function next() {
-    if (id < (users.length - 1)) {
-        id++;
-        renderUser();
-    }
-}
-
-function previous() {
-    if (id > 0) {
-        id--;
-        renderUser();
-    }
-}
-
-function set(i) {
-    id = i;
-    renderUser();
-}
-
 function renderUser() {
     //Get elements
     let range = $(".area-slider").data("ionRangeSlider");
@@ -176,24 +90,6 @@ function renderUser() {
     });
     //Update filter hash
     hash.set("period", (period.from - days[0] + 1) + "-" + (period.to - days[0] + 1));
-}
-
-function goToUser() {
-    window.open("https://vk.com/id" + users[id].id, '_blank').focus();
-}
-
-function toggleEmptyFilter() {
-    users[id].getFilter("empty").toggle(
-        !document.getElementById("empty-filter").checked
-    );
-    hash.set("empty", document.getElementById("empty-filter").checked);
-    drawer.render();
-}
-
-function changeDeviceFilter(deviceId) {
-    users[id].getFilter("device").device = +deviceId;
-    hash.set("device", deviceId);
-    drawer.render();
 }
 
 /**

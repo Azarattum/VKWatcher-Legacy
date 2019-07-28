@@ -19,6 +19,9 @@
     <script src="scripts/data/user.cls.js"></script>
     <script src="scripts/drawer.cls.js"></script>
     <script src="scripts/hash.cls.js"></script>
+    <script src="scripts/designer.cls.js"></script>
+    <script src="scripts/controller.cls.js"></script>
+    <script src="scripts/interface.js"></script>
     <script src="scripts/main.js"></script>
     <title>VKW Interface</title>
 </head>
@@ -28,9 +31,9 @@
         <div class="report-window" ng-controller="report-controller">
             <div class="report-header">
                 <div class="user-name"></div>
-                <div class="user-id" onclick="goToUser()"></div>
+                <div class="user-id" onclick="open()"></div>
                 <div class="buttons">
-                    <div class="button range" onclick="">
+                    <div class="button range">
                         &#x2699;
                         <div class="settings dropdown">
                             <span class="label">Filters:</span>

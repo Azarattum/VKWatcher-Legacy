@@ -12,15 +12,9 @@ class Drawer {
         this.canvas = canvas;
         this.context = canvas.getContext("2d");
         this.user = user;
-        this.select = document.getElementsByClassName("select")[0];
-        this.selectTime = document.getElementsByClassName("time")[0];
         //#endregion
 
         this.update();
-        //Setup canvas events
-        this.canvas.onmousemove = (e) => {this._updateSelection(e, this)};
-        this.canvas.onmouseleave = (e) => {this._updateSelection(e, this)};
-        this.canvas.ontouchmove = (e) => {this._updateSelection(e, this)};
     }
 
     //#region Public methods
@@ -156,26 +150,4 @@ class Drawer {
             ctx.globalAlpha = 1.0;
         }
     }
-
-    //Controls
-    _updateSelection(eventArgs, drawer) {
-        const height = drawer.date.height;
-        const oneDay = 24*60*60;
-        const select = drawer.select;
-        const selectTime = drawer.selectTime;
-        const y = eventArgs.offsetY;
-
-        let time = Math.round(y / ((drawer.viewport.height - height) / oneDay) * 1000);
-        if (time > (oneDay * 1000) || time < 0 || eventArgs.type == "mouseleave") {
-            select.style.top = "-100px";
-        }
-        else {
-            let date = new Date(-25200000);
-            date.setMilliseconds(time);
-
-            selectTime.innerHTML = date.toTimeString().split(' ')[0];
-            select.style.top = y + "px";
-        }
-    }
-    //#endregion
 }
