@@ -59,7 +59,7 @@ export default class Day {
 
         return closestSession;
     }
-    
+
     /**
      * Returns a day with applied filter on sessions
      * @param {IFilter} filter Filter to apply
@@ -74,7 +74,9 @@ export default class Day {
         let day = new Day(this.date);
         //Filter the sessions
         let sessions = this.sessions.filter(
-            x => {return filter.passSession(x)}
+            x => {
+                return filter.passSession(x)
+            }
         );
         //Add filtered session to a new day
         day.addSession(sessions);

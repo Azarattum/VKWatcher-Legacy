@@ -30,7 +30,7 @@ export default class Controller {
         const controller = this;
         const drawer = this.drawer;
         const height = this.drawer.date.height;
-        const oneDay = 24*60*60;
+        const oneDay = 24 * 60 * 60;
 
         function update(eventArgs) {
             const y = eventArgs.offsetY;
@@ -39,8 +39,7 @@ export default class Controller {
             if (time > (oneDay * 1000) || time < 0 || eventArgs.type == "mouseleave") {
                 selectionBlock.style.top = "-100px";
                 controller.time = null;
-            }
-            else {
+            } else {
                 let date = new Date(-25200000);
                 date.setMilliseconds(time);
                 controller.time = date;
@@ -68,7 +67,7 @@ export default class Controller {
         const left = drawer.time.fontSize * 3;
         const margin = drawer.column.margin;
         const height = this.drawer.date.height;
-        const oneDay = 24*60*60;
+        const oneDay = 24 * 60 * 60;
 
         function update(eventArgs) {
             const days = drawer.user.getDays();
@@ -104,16 +103,16 @@ export default class Controller {
             let topPos = ((drawer.viewport.height - height) / oneDay / window.devicePixelRatio);
             if ((session.from.getHours() > 13 && drawer.canvas.clientWidth >= 600) ||
                 session.from.getHours() <= 13 && drawer.canvas.clientWidth < 600) {
-                topPos *= (session.to.getSeconds() + 
-                session.to.getMinutes() * 60 +
-                session.to.getHours() * 60 * 60);
+                topPos *= (session.to.getSeconds() +
+                    session.to.getMinutes() * 60 +
+                    session.to.getHours() * 60 * 60);
                 if (drawer.canvas.clientWidth >= 600) {
                     topPos -= sessionBlock.clientHeight;
                 }
             } else {
-                topPos *= (session.from.getSeconds() + 
-                session.from.getMinutes() * 60 +
-                session.from.getHours() * 60 * 60);
+                topPos *= (session.from.getSeconds() +
+                    session.from.getMinutes() * 60 +
+                    session.from.getHours() * 60 * 60);
                 if (drawer.canvas.clientWidth < 600) {
                     topPos -= sessionBlock.clientHeight;
                 }
@@ -122,7 +121,7 @@ export default class Controller {
             if (drawer.canvas.clientWidth < 600) {
                 leftPos = drawer.canvas.clientWidth / 2 - sessionBlock.clientWidth / 2 + 16;
             }
-            
+
             sessionBlock.style.opacity = (drawer.canvas.clientWidth >= 600) ? 1 : 0.8;
             sessionBlock.style.left = leftPos + "px";
             sessionBlock.style.top = topPos + "px";

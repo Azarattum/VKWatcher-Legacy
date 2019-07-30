@@ -39,7 +39,7 @@ function changeDeviceFilter(deviceId) {
     dataDrawer.render();
 }
 
-function tab(eventArgs, tabId) { 
+function tab(eventArgs, tabId) {
     if (document.getElementById(tabId).style.display == "block") return;
 
     //Hide all tabs
@@ -47,7 +47,7 @@ function tab(eventArgs, tabId) {
     for (const tab of tabcontents) {
         tab.style.display = "none";
     }
-  
+
     //Remove all fills
     let tablinks = document.getElementsByClassName("tablinks");
     for (const link of tablinks) {

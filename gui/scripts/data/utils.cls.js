@@ -18,8 +18,8 @@ export default class DateUtils {
         //Count difference
         const dateDifference = Math.abs(+date1 - date2);
         //Count days
-        const oneDay = 24*60*60*1000;
-        return Math.round(dateDifference/oneDay);
+        const oneDay = 24 * 60 * 60 * 1000;
+        return Math.round(dateDifference / oneDay);
     }
 
     /**
@@ -62,8 +62,8 @@ export default class DateUtils {
      * @param {Number} day Global day
      */
     static getDateFromGlobalDay(day) {
-        const oneDay = 24*60*60*1000;
-        return this.normalizeDateUp(new Date(oneDay*day));
+        const oneDay = 24 * 60 * 60 * 1000;
+        return this.normalizeDateUp(new Date(oneDay * day));
     }
 
     /**
@@ -89,7 +89,7 @@ export default class DateUtils {
         const minutes = Math.floor((duration - (60 * 60 * hours)) / 60);
         const seconds = Math.floor(duration - (60 * 60 * hours) - (60 * minutes));
 
-        const format = ((hours > 0) ? hours + " h, " : "") + 
+        const format = ((hours > 0) ? hours + " h, " : "") +
             ((minutes > 0) ? minutes + " min, " : "") + seconds + " sec";
 
         return format;

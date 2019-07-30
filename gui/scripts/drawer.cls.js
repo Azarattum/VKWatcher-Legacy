@@ -111,18 +111,18 @@ export default class Drawer {
             ctx.fillText(weekDay, left + width * i + width / 2, this.viewport.height - size);
             ctx.fillText(date, left + width * i + width / 2, this.viewport.height);
             //#endregion
-            
+
             //#region Columns drawing
             for (const session of day.sessions) {
                 //Caculate coordinates
                 const x = (width * i) + left;
-                const y = hour * session.from.getHours()
-                    + hour / 60 * session.from.getMinutes()
-                    + (hour / 60 / 60) * session.from.getSeconds();
+                const y = hour * session.from.getHours() +
+                    hour / 60 * session.from.getMinutes() +
+                    (hour / 60 / 60) * session.from.getSeconds();
 
-                let length = hour * 
+                let length = hour *
                     ((session.to - session.from) / 1000 / 60 / 60);
-                
+
                 if (length < 1) length = 1;
 
                 ctx.fillStyle = styles.getPropertyValue("--color-" + session.device);

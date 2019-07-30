@@ -27,7 +27,7 @@ export default class Designer {
                 return date;
             }
         });
-    
+
         //Zoom selector
         $(".zoom-slider").ionRangeSlider({
             min: 0.75,
@@ -46,7 +46,7 @@ export default class Designer {
         //Bar chart
         window.chartDrawer = new Chart("chart-container", this.data);
     }
-    
+
     static initializeEvents() {
         //Window
         window.addEventListener("resize", () => {
@@ -54,7 +54,7 @@ export default class Designer {
             dataDrawer.render();
         });
     }
-    
+
     static initializeURL() {
         const days = Object.keys(window.users[window.id].days);
         window.hash = new Hash({
@@ -64,11 +64,11 @@ export default class Designer {
             device: -1,
             empty: true
         });
-    
+
         if (Number.isInteger(+hash.get("user"))) {
             id = +hash.get("user");
         }
-    
+
         if (Number.isFinite(+hash.get("zoom"))) {
             $(".zoom-slider").data("ionRangeSlider").update({
                 from: +hash.get("zoom")
@@ -76,16 +76,16 @@ export default class Designer {
             document.getElementsByClassName("page")[0].
             style.setProperty("--vertical-zoom", +hash.get("zoom"));
         }
-    
+
         if (hash.get("empty") === "false") {
             users[id].getFilter("empty").toggle(true);
             document.getElementById("empty-filter").checked = false;
         }
-    
+
         if (Number.isInteger(+hash.get("device"))) {
             users[id].getFilter("device").device = +hash.get("device");
         }
-    
+
         if (hash.exists("period") && hash.get("period").split('-').length == 2) {
             const days = Object.keys(users[id].days);
             users[id].getFilter("period").from = +days[0] + (+hash.get("period").split('-')[0]) - 1;

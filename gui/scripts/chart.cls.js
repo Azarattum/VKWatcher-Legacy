@@ -2,7 +2,12 @@ import ChartElement from "/libs/charts/scripts/element/element.js";
 import DateUtils from "./data/utils.cls.js";
 
 export default class Chart {
-    constructor(containerId, {vshaderBar, fshaderBar, vshaderLayout, fshaderLayout}) {
+    constructor(containerId, {
+        vshaderBar,
+        fshaderBar,
+        vshaderLayout,
+        fshaderLayout
+    }) {
         const container = document.getElementById(containerId);
         const pageStyle = getComputedStyle(document.body);
         const shaders = {
@@ -28,7 +33,7 @@ export default class Chart {
      * Changes user whose chart is drawing
      * @param {User} user New user changes user whose chart is drawing
      */
-    switch(user) {
+    switch (user) {
         if (Object.keys(user.days).length == 0) {
             this.element.elements.container.innerHTML = "";
             return;
@@ -89,10 +94,17 @@ export default class Chart {
         //Template object
         let data = {
             columns: [
-                ["x"], ["y0"], ["y1"], ["y2"], ["y3"], ["y4"], ["y5"], ["y6"], ["y7"]
+                ["x"],
+                ["y0"],
+                ["y1"],
+                ["y2"],
+                ["y3"],
+                ["y4"],
+                ["y5"],
+                ["y6"],
+                ["y7"]
             ],
-            types:
-            {
+            types: {
                 "y0": "bar",
                 "y1": "bar",
                 "y2": "bar",
@@ -103,8 +115,7 @@ export default class Chart {
                 "y7": "bar",
                 "x": "x"
             },
-            names:
-            {
+            names: {
                 "y0": "Unknown",
                 "y1": "Mobile",
                 "y2": "iPhone",
@@ -114,8 +125,7 @@ export default class Chart {
                 "y6": "Windows",
                 "y7": "Web"
             },
-            colors:
-            {
+            colors: {
                 "y0": colors.getPropertyValue("--color-unknown"),
                 "y1": colors.getPropertyValue("--color-mobile"),
                 "y2": colors.getPropertyValue("--color-iphone"),
@@ -129,14 +139,30 @@ export default class Chart {
         }
 
         //Scan days
+        let total = [0, 0, 0, 0, 0, 0, 0, 0];
         const days = Object.values(this.user.days);
         for (let i = 0; i < days.length; i++) {
             const day = days[i];
             data.columns[0][i + 1] = +day.date;
             for (let j = 1; j < 9; j++) {
-                data.columns[j][i + 1] = day.sessions.reduce((a, b) => {
+                const sum = day.sessions.reduce((a, b) => {
                     return a + ((b.platformId == (j - 1)) ? b.length : 0);
                 }, 0);
+
+                data.columns[j][i + 1] = sum;
+                total[j - 1] += sum;
+            }
+        }
+
+        //Clear empty devices
+        let offset = 0;
+        for (let i = 0; i < total.length; i++) {
+            if (total[i] == 0) {
+                data.columns.splice(i + 1 - offset, 1);
+                delete data.types["y" + i];
+                delete data.names["y" + i];
+                delete data.colors["y" + i];
+                offset++;
             }
         }
 
@@ -148,12 +174,16 @@ export default class Chart {
      */
     _render() {
         if (!this.element || !this.element.chartData) {
-            requestAnimationFrame(() => {this._render();});
+            requestAnimationFrame(() => {
+                this._render();
+            });
             return;
         }
 
         this.element.render();
-        requestAnimationFrame(() => {this._render();});
+        requestAnimationFrame(() => {
+            this._render();
+        });
     }
 
     /**
@@ -166,7 +196,9 @@ export default class Chart {
             }
             this.update();
         });
-        requestAnimationFrame(() => {this._render();});
+        requestAnimationFrame(() => {
+            this._render();
+        });
     }
-    //#region 
+    //#endregion
 }

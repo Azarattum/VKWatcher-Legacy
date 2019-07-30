@@ -61,7 +61,7 @@ function parseData(data) {
         user.addFilter(empty);
         user.addFilter(device);
         user.addFilter(period);
-        
+
         //Save user to an array
         window.users.push(user);
         document.getElementsByClassName("users")[0].innerHTML +=

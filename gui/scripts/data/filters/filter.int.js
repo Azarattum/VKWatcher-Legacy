@@ -34,7 +34,7 @@ export default class IFilter {
         throw new Error("Not implemented exception!");
         return true;
     }
-    
+
     /**
      * Toggle the state of the filter.
      * @param {Boolean} value Enable or disable the filter.

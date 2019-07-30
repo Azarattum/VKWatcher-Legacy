@@ -47,7 +47,7 @@ export default class User {
         var maxDay = +days[days.length - 1];
         var currentDay = +days[0];
         var user = this;
-        return function() {
+        return function () {
             if (currentDay > maxDay) {
                 return undefined;
             } else {

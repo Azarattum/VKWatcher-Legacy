@@ -27,7 +27,7 @@ export default class DeviceFilter extends IFilter {
     passSession(session, device = null) {
         device = device || this.device;
         if (device === null || device === -1) return true;
-        
+
         //Case when the device value is platform id
         if (Number.isFinite(device)) {
             return session.platformId === device;
@@ -39,10 +39,10 @@ export default class DeviceFilter extends IFilter {
             });
         }
         //Case when the device value is the name
-        else if (typeof(device) === "string"){
+        else if (typeof (device) === "string") {
             return session.device == device.toLowerCase();
         }
-        
+
         return false;
     }
 }

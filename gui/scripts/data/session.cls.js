@@ -39,8 +39,8 @@ export default class Session {
      * @param {Boolen} dailyPrecision Check only date, but not time
      */
     isCovered(date, dailyPrecision = true) {
-        let from = dailyPrecision? +DateUtils.normalizeDateUp(this.from): +this.from;
-        let to = dailyPrecision? +DateUtils.normalizeDateDown(this.to): +this.to;
+        let from = dailyPrecision ? +DateUtils.normalizeDateUp(this.from) : +this.from;
+        let to = dailyPrecision ? +DateUtils.normalizeDateDown(this.to) : +this.to;
 
         return +date >= from && +date <= to;
     }
