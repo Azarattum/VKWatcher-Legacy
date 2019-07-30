@@ -173,7 +173,7 @@ export default class Chart {
      * Renders the chart
      */
     _render() {
-        if (!this.element || !this.element.chartData) {
+        if (hash.get("tab") != "chart" || !this.element || !this.element.chartData) {
             requestAnimationFrame(() => {
                 this._render();
             });

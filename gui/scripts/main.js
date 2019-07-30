@@ -85,7 +85,7 @@ window.renderUser = () => {
     //Render drawer object
     dataDrawer.user = users[id];
     dataDrawer.render();
-    if (getComputedStyle(document.getElementById("chart")).display != "none") {
+    if (hash.get("tab") == "chart") {
         chartDrawer.switch(users[id]);
     }
     //Update range selector

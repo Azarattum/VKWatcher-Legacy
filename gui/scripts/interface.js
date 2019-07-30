@@ -39,30 +39,37 @@ function changeDeviceFilter(deviceId) {
     dataDrawer.render();
 }
 
-function tab(eventArgs, tabId) {
-    if (document.getElementById(tabId).style.display == "block") return;
+function tab(tabId, force = false) {
+    if (hash.get("tab") == tabId && !force) return;
 
     //Hide all tabs
     let tabcontents = document.getElementsByClassName("tabcontent");
     for (const tab of tabcontents) {
         tab.style.display = "none";
+        if (tab.className.indexOf(tabId) != -1) {
+            tab.style.display = "block";
+        }
     }
 
     //Remove all fills
     let tablinks = document.getElementsByClassName("tablinks");
     for (const link of tablinks) {
         link.className = link.className.replace(" filled", "");
-    }
-
-    document.getElementById(tabId).style.display = "block";
-    eventArgs.currentTarget.className += " filled";
+    }    
+    document.getElementsByClassName("tablinks icon " + tabId)[0].className += " filled";
 
     if (tabId == "chart") {
         setTimeout(() => {
-            chartDrawer.switch(users[id]);
+            if (window.chartDrawer) {
+                chartDrawer.switch(users[id]);
+            }
         }, 50);
     } else if (tabId == "overview") {
-        dataDrawer.update();
-        dataDrawer.render();
+        if (window.dataDrawer) {
+            dataDrawer.update();
+            dataDrawer.render();
+        }
     }
+
+    hash.set("tab", tabId);
 }

@@ -62,7 +62,8 @@ export default class Designer {
             zoom: 1,
             period: "1-" + days.length,
             device: -1,
-            empty: true
+            empty: true,
+            tab: "overview"
         });
 
         if (Number.isInteger(+hash.get("user"))) {
@@ -90,6 +91,12 @@ export default class Designer {
             const days = Object.keys(users[id].days);
             users[id].getFilter("period").from = +days[0] + (+hash.get("period").split('-')[0]) - 1;
             users[id].getFilter("period").to = +days[0] + (+hash.get("period").split('-')[1]) - 1;
+        }
+
+        if (document.getElementsByClassName("tab-"+hash.get("tab")).length > 0) {
+            tab(hash.get("tab"), true);
+        } else {
+            hash.set("tab", "overview");
         }
     }
 }

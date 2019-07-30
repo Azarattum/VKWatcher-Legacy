@@ -64,12 +64,12 @@ export default class Controller {
         const sessionDevice = document.getElementById("session-device");
         const controller = this;
         const drawer = this.drawer;
-        const left = drawer.time.fontSize * 3;
         const margin = drawer.column.margin;
         const height = this.drawer.date.height;
         const oneDay = 24 * 60 * 60;
 
         function update(eventArgs) {
+            const left = drawer.time.fontSize * 3;
             const days = drawer.user.getDays();
             const x = eventArgs.offsetX;
             const column = (drawer.viewport.width - left) / days.length / window.devicePixelRatio;

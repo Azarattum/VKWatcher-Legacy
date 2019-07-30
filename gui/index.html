@@ -27,33 +27,35 @@
                 <div class="user-name"></div>
                 <div class="user-id" onclick="open()"></div>
                 <div class="buttons">
-                    <div class="button range">
+                    <div class="button range tab-overview tabcontent">
                         &#x2699;
                         <div class="settings dropdown">
-                            <span class="label">Filters:</span>
-                            <div class="filters">
-                                <label class="empty-container" onclick="toggleEmptyFilter()">Empty
-                                    <input type="checkbox" id="empty-filter" checked="true">
-                                    <span class="empty-checkmark"></span>
-                                </label>
-                                <select class="device" onchange="changeDeviceFilter(this.value)">
-                                    <option value="-1" class="none">No Device Filter</option>
-                                    <option value="1" style="background-color:var(--color-mobile)">Mobile</option>
-                                    <option value="2" style="background-color:var(--color-iphone)">iPhone</option>
-                                    <option value="3" style="background-color:var(--color-ipad)">iPad</option>
-                                    <option value="4"style="background-color:var(--color-android)">Android</option>
-                                    <option value="5" style="background-color:var(--color-wphone)">WPhone</option>
-                                    <option value="6" style="background-color:var(--color-windows)">Windows</option>
-                                    <option value="7" style="background-color:var(--color-web)">Web</option>
-                                </select>
-                            </div>
-                            <span class="label">Period:</span>
-                            <div class="period">
-                                <input type="text" class="area-slider" name="my_range" value="" />
-                            </div>
-                            <span class="label">Zoom:</span>
-                            <div class="zoom">
-                                <input type="text" class="zoom-slider" name="my_range" value="" />
+                            <div class="tab-overview tabcontent">
+                                <span class="label">Filters:</span>
+                                <div class="filters">
+                                    <label class="empty-container" onclick="toggleEmptyFilter()">Empty
+                                        <input type="checkbox" id="empty-filter" checked="true">
+                                        <span class="empty-checkmark"></span>
+                                    </label>
+                                    <select class="device" onchange="changeDeviceFilter(this.value)">
+                                        <option value="-1" class="none">No Device Filter</option>
+                                        <option value="1" style="background-color:var(--color-mobile)">Mobile</option>
+                                        <option value="2" style="background-color:var(--color-iphone)">iPhone</option>
+                                        <option value="3" style="background-color:var(--color-ipad)">iPad</option>
+                                        <option value="4" style="background-color:var(--color-android)">Android</option>
+                                        <option value="5" style="background-color:var(--color-wphone)">WPhone</option>
+                                        <option value="6" style="background-color:var(--color-windows)">Windows</option>
+                                        <option value="7" style="background-color:var(--color-web)">Web</option>
+                                    </select>
+                                </div>
+                                <span class="label">Period:</span>
+                                <div class="period">
+                                    <input type="text" class="area-slider" name="my_range" value="" />
+                                </div>
+                                <span class="label">Zoom:</span>
+                                <div class="zoom">
+                                    <input type="text" class="zoom-slider" name="my_range" value="" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -68,11 +70,17 @@
             </div>
             <div class="report-items">
                 <div class="tablinks">
-                    <div class="tab"><div class="tablinks icon overview filled" onclick="tab(event, 'overview')"></div></div>
-                    <div class="tab"><div class="tablinks icon chart" onclick="tab(event, 'chart')"><i></i></div></div>                    
-                    <div class="tab"><div class="tablinks icon analysis" onclick="tab(event, 'analysis')"></div></div>                    
+                    <div class="tab">
+                        <div class="tablinks icon overview" onclick="tab('overview')"></div>
+                    </div>
+                    <div class="tab">
+                        <div class="tablinks icon chart" onclick="tab('chart')"><i></i></div>
+                    </div>
+                    <div class="tab">
+                        <div class="tablinks icon analysis" onclick="tab('analysis')"></div>
+                    </div>
                 </div>
-                <div class="overview tabcontent" id="overview">
+                <div class="tab-overview tabcontent overview">
                     <div class="report-wrapper">
                         <canvas class="report-render"></canvas>
                         <div class="select" style="top: -100px;">
@@ -83,18 +91,30 @@
                             <h2>Session</h2>
                             <p class="date" id="session-date">Sun, Jul 28</p>
                             <table>
-                                <tr><td>Duration: </td><td class="table-item" id="session-duration">5 sec</td></tr>
-                                <tr><td>From: </td><td class="table-item" id="session-from">00:00:00</td></tr>
-                                <tr><td>To: </td><td class="table-item" id="session-to">14:15:54</td></tr>
-                                <tr><td>Device: </td><td class="table-item" id="session-device">unknown</td></tr>
+                                <tr>
+                                    <td>Duration: </td>
+                                    <td class="table-item" id="session-duration">5 sec</td>
+                                </tr>
+                                <tr>
+                                    <td>From: </td>
+                                    <td class="table-item" id="session-from">00:00:00</td>
+                                </tr>
+                                <tr>
+                                    <td>To: </td>
+                                    <td class="table-item" id="session-to">14:15:54</td>
+                                </tr>
+                                <tr>
+                                    <td>Device: </td>
+                                    <td class="table-item" id="session-device">unknown</td>
+                                </tr>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="chart tabcontent" id="chart">
+                <div class="tab-chart tabcontent chart">
                     <div id="chart-container"></div>
                 </div>
-                <div class="analysis tabcontent" id="analysis">
+                <div class="tab-analysis tabcontent analysis">
 
                 </div>
             </div>
