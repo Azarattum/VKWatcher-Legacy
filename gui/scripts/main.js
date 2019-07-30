@@ -1,7 +1,7 @@
 /**
  * Main script
  */
-import Chart from "/libs/charts/scripts/element/element.js";
+
 import User from "./data/user.cls.js";
 import Session from "./data/session.cls.js";
 
@@ -85,6 +85,9 @@ window.renderUser = () => {
     //Render drawer object
     dataDrawer.user = users[id];
     dataDrawer.render();
+    if (getComputedStyle(document.getElementById("chart")).display != "none") {
+        chartDrawer.switch(users[id]);
+    }
     //Update range selector
     const days = Object.keys(users[id].days);
     const period = users[id].getFilter("period");

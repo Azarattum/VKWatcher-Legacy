@@ -1,5 +1,6 @@
 import Hash from "./hash.cls.js";
 import DateUtils from "./data/utils.cls.js";
+import Chart from "./chart.cls.js";
 
 /**
  * Page designer class
@@ -42,80 +43,9 @@ export default class Designer {
             }
         });
 
-        ///Bar chart
-        /*const container = document.getElementById("chart-container");
-        const pageStyle = getComputedStyle(document.body);
-        const shaders = {
-            bar: [this.data["vshaderBar"], this.data["fshaderBar"]],
-            layout: [this.data["vshaderLayout"], this.data["fshaderLayout"]]
-        };*/
-        
-        /*this.chartElement = new ChartElement(container, shaders);
-        this.chartElement.chart = this.initializeData();
-        this.chartElement.style = {
-            background: "255, 255, 255",
-            text: pageStyle.getPropertyValue("--color-text"),
-            font: pageStyle["font-family"],
-            lowlight: 0.05
-        };*/
+        //Bar chart
+        window.chartDrawer = new Chart("chart-container", this.data);
     }
-
-    /*static initializeData() {
-        const colors = getComputedStyle(document.getElementsByClassName("page")[0]);
-        let data = {
-            columns: [
-                ["x"], ["y0"], ["y1"], ["y2"], ["y3"], ["y4"], ["y5"], ["y6"], ["y7"]
-            ],
-            types:
-            {
-                "y0": "bar",
-                "y1": "bar",
-                "y2": "bar",
-                "y3": "bar",
-                "y4": "bar",
-                "y5": "bar",
-                "y6": "bar",
-                "y7": "bar",
-                "x": "x"
-            },
-            names:
-            {
-                "y0": "Unknown",
-                "y1": "Mobile",
-                "y2": "iPhone",
-                "y3": "iPad",
-                "y4": "Android",
-                "y5": "WPhone",
-                "y6": "Windows",
-                "y7": "Web"
-            },
-            colors:
-            {
-                "y0": colors.getPropertyValue("--color-unknown"),
-                "y1": colors.getPropertyValue("--color-mobile"),
-                "y2": colors.getPropertyValue("--color-iphone"),
-                "y3": colors.getPropertyValue("--color-ipad"),
-                "y4": colors.getPropertyValue("--color-android"),
-                "y5": colors.getPropertyValue("--color-wphone"),
-                "y6": colors.getPropertyValue("--color-windows"),
-                "y7": colors.getPropertyValue("--color-web")
-            },
-            stacked: true
-        }
-        const days = Object.values(this.user.days);
-        for (let i = 0; i < days.length; i++) {
-            const day = days[i];
-            data.columns[0][i + 1] = +day.date;
-            for (let j = 1; j < 9; j++) {
-                data.columns[j][i + 1] = day.sessions.reduce((a, b) => {
-                    return a + ((b.platformId == (j - 1)) ? b.length : 0);
-                }, 0);
-            }
-        }
-
-        this.chartElement.chartData = new Chart(data);
-        return data;
-    }*/
     
     static initializeEvents() {
         //Window

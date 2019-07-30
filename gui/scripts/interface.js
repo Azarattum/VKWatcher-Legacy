@@ -54,4 +54,11 @@ function tab(eventArgs, tabId) {
 
     document.getElementById(tabId).style.display = "block";
     eventArgs.currentTarget.className += " filled";
+
+    if (tabId == "chart") {
+        chartDrawer.switch(users[id]);
+    } else if (tabId == "overview") {
+        dataDrawer.update();
+        dataDrawer.render();
+    }
 }

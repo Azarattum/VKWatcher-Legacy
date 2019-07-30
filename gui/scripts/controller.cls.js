@@ -76,7 +76,7 @@ export default class Controller {
             const column = (drawer.viewport.width - left) / days.length / window.devicePixelRatio;
 
             const dayIndex = Math.floor((x - (left / window.devicePixelRatio)) / column);
-            if (controller.time === null || dayIndex < 0) {
+            if (controller.time === null || dayIndex < 0 || days.length <= 0) {
                 sessionBlock.style.opacity = 0;
                 return;
             }

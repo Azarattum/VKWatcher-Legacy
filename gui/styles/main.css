@@ -7,7 +7,12 @@
     --color-windows: rgb(45, 18, 109);
     --color-web: rgb(109, 18, 74);
     --color-unknown: rgb(0, 0, 0);
+
     --vertical-zoom: 1;
+    --main-margin: 14px;
+    --preview-size: 48px;
+    --button-size: 28px;
+    --color-background: 255,255,255
 }
 
 body {
