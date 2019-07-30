@@ -37,6 +37,10 @@ body {
         left: 50% !important;
         transform: translateX(-50%) !important;
     }
+    
+    .menu:hover>.dropdown {
+        height: calc(80vh - 48px) !important;
+    }
 
     .report-header>.user-name {
         margin-bottom: 2.5em;
@@ -72,6 +76,21 @@ body {
     .icon {
         top: 0px;
     }
+
+    .space {
+        height: 48px !important;
+    }
+
+    #chart-container {
+        margin-bottom: 0 !important;
+    }
+}
+
+.space {
+    display: block;
+    position: relative;
+    width: 100vw;
+    height: 0;
 }
 
 .report-header {
