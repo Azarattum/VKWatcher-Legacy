@@ -37,7 +37,7 @@ export default class Controller {
             let time = Math.round(y / ((drawer.viewport.height - height) / window.devicePixelRatio / oneDay) * 1000);
 
             if (time > (oneDay * 1000) || time < 0 || eventArgs.type == "mouseleave" || y === undefined) {
-                selectionBlock.style.top = "-100px";
+                selectionBlock.style.top = "-1000px";
                 controller.time = null;
             } else {
                 let date = new Date(-25200000);

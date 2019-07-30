@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" id="bar">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/overview.css">
     <link rel="stylesheet" href="styles/chart.css">
@@ -28,7 +30,7 @@
                 <div class="user-id" onclick="userProfile()"></div>
                 <div class="buttons">
                     <div class="button range tab-overview tabcontent">
-                        &#x2699;
+                        &#x2699;&#xFE0E;
                         <div class="settings dropdown">
                             <div class="tab-overview tabcontent">
                                 <span class="label">Filters:</span>
@@ -64,8 +66,8 @@
                         <div class="dropdown users">
                         </div>
                     </div>
-                    <div class="button previous" onclick="previous()">&#x25c0;</div>
-                    <div class="button next" onclick="next()">&#x25ba;</div>
+                    <div class="button previous" onclick="previous()">&#9668;</div>
+                    <div class="button next" onclick="next()">&#9658;</div>
                 </div>
             </div>
             <div class="report-items">
@@ -83,7 +85,7 @@
                 <div class="tab-overview tabcontent overview">
                     <div class="report-wrapper">
                         <canvas class="report-render"></canvas>
-                        <div class="select" style="top: -100px;">
+                        <div class="select" style="top: -1000px;">
                             <div class="line"></div>
                             <div class="time"></div>
                         </div>

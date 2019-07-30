@@ -1,4 +1,4 @@
-import ChartElement from "/libs/charts/scripts/element/element.js";
+import ChartElement from "../libs/charts/scripts/element/element.js";
 import DateUtils from "./data/utils.cls.js";
 
 export default class Chart {
@@ -190,10 +190,22 @@ export default class Chart {
      * Registers all elements events
      */
     _register_events() {
+        //Save old sizes
+        let {width = null, height = null} = {};
+
         window.addEventListener("resize", () => {
-            if (!this.element || !this.element.chartData) {
+            //Check if size has changed
+            const newSize = this.element.elements.container.getClientRects()[0];
+
+            if (!this.element || !this.element.chartData || newSize == undefined ||
+                (newSize.width == width && newSize.height == height)) {
+                width = newSize ? newSize.width : null;
+                height = newSize ? newSize.height : null;
                 return;
             }
+
+            width = newSize.width;
+            height = newSize.height;
             this.update();
         });
         requestAnimationFrame(() => {
