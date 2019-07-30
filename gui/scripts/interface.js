@@ -40,6 +40,8 @@ function changeDeviceFilter(deviceId) {
 }
 
 function tab(eventArgs, tabId) { 
+    if (document.getElementById(tabId).style.display == "block") return;
+
     //Hide all tabs
     let tabcontents = document.getElementsByClassName("tabcontent");
     for (const tab of tabcontents) {
@@ -56,7 +58,9 @@ function tab(eventArgs, tabId) {
     eventArgs.currentTarget.className += " filled";
 
     if (tabId == "chart") {
-        chartDrawer.switch(users[id]);
+        setTimeout(() => {
+            chartDrawer.switch(users[id]);
+        }, 50);
     } else if (tabId == "overview") {
         dataDrawer.update();
         dataDrawer.render();

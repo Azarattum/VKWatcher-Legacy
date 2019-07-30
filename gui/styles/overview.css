@@ -1,13 +1,13 @@
 .overview {
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-direction: row;
 }
 
 .report-wrapper {
     display: inline-block;
-    width: 100%;
-    height: calc(100vh * var(--vertical-zoom) - 96px - 20px);
+    height: calc(100vh * var(--vertical-zoom) - 96px - 24px);
+    width: calc(100vw - 24px);
     margin: 8px;
     padding: 4px;
     border-radius: 18px;
@@ -17,7 +17,7 @@
 }
 
 .report-render {
-    width: calc(100% - 8px * 2);
+    width: calc(100vw - 8px * 4);
     height: 100%;
     color: var(--color-text);
 }

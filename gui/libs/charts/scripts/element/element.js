@@ -433,7 +433,7 @@ export default class ChartElement {
         this.elements.range.style.zIndex = "100";
 
         this.elements.tooltip.style.position = "absolute";
-        this.elements.tooltip.style.minWidth = "135.85px";
+        this.elements.tooltip.style.minWidth = "192px";
         this.elements.tooltip.style.padding = parseInt(this.styles.margin) + "px";
         this.elements.tooltip.style.fontSize = "14.3px";
         this.elements.tooltip.style.borderRadius = parseInt(this.styles.margin) / 2 + "px";

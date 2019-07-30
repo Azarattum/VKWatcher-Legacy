@@ -1,6 +1,6 @@
 #chart-container {
     display: inline-block;
-    width: calc(100% - 24px);
+    width: calc(100vw - 24px);
     height: calc(100vh * var(--vertical-zoom) - 96px - 24px);
     margin: 8px;
     padding: 4px;

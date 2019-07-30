@@ -1,4 +1,5 @@
 import ChartElement from "/libs/charts/scripts/element/element.js";
+import DateUtils from "./data/utils.cls.js";
 
 export default class Chart {
     constructor(containerId, {vshaderBar, fshaderBar, vshaderLayout, fshaderLayout}) {
@@ -46,6 +47,22 @@ export default class Chart {
         this.element._initializeComponent();
         this.element._initializeStyle();
         this.element.chart = this.data;
+
+        //Custom format style
+        let func = this.element.drawer.onrecalculated;
+        this.element.drawer.onrecalculated = () => {
+            func();
+            let values = this.element.elements.values.children;
+            for (const valueElement of values) {
+                let lastChild = valueElement.children[valueElement.children.length - 1];
+                lastChild.innerHTML = DateUtils.getReadableDuration(+(lastChild.innerHTML.replace(/\s*/g, "")));
+            }
+        }
+        this.element.drawer.layoutDrawer._formatValue = (number) => {
+            const hours = Math.floor(number / 60 / 60);
+            return hours + "h " + Math.round((number - (hours * 60 * 60)) / 60) + "m";
+        };
+
         this.update();
     }
 
@@ -143,7 +160,12 @@ export default class Chart {
      * Registers all elements events
      */
     _register_events() {
-        window.addEventListener("resize", () => {this.update();});
+        window.addEventListener("resize", () => {
+            if (!this.element || !this.element.chartData) {
+                return;
+            }
+            this.update();
+        });
         requestAnimationFrame(() => {this._render();});
     }
     //#region 

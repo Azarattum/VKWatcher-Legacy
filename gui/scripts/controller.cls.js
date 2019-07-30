@@ -91,7 +91,7 @@ export default class Controller {
 
             const dateParts = date.toString().split(' ');
             sessionDate.innerText = dateParts[0] + ", " + dateParts[1] + " " + dateParts[2];
-            sessionDuration.innerText = DateUtils.getReadableDuration(session.from, session.to);
+            sessionDuration.innerText = DateUtils.getReadableDuration(session.length);
             sessionFrom.innerText = session.from.toTimeString().split(' ')[0];
             sessionTo.innerText = session.to.toTimeString().split(' ')[0];
             sessionDevice.innerText = session.device;

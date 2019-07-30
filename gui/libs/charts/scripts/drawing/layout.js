@@ -167,7 +167,7 @@ export default class LayoutDrawer {
             if (textY - lineSpace / 4 < 0) continue;
 
             let label = (this.gl.canvas.height - textY) / this.gl.canvas.height * graphValue + graphMin;
-            label = format(label, this.chartDrawer.chart.percentage);
+            label = this._formatValue(label, this.chartDrawer.chart.percentage);
             if (graphValue2) {
                 let color = new Color(this.chartDrawer.graphDrawers[0].color);
                 color.a *= textColor.a / (this.opacity / 3 * 2);
@@ -178,7 +178,7 @@ export default class LayoutDrawer {
 
             if (graphValue2) {
                 label = (this.gl.canvas.height - textY) / this.gl.canvas.height * graphValue2 + graphMin2;
-                label = format(label, this.chartDrawer.chart.percentage);
+                label = this._formatValue(label, this.chartDrawer.chart.percentage);
                 let color = new Color(this.chartDrawer.graphDrawers[1].color);
                 color.a *= textColor.a / (this.opacity / 3 * 2);
                 this.context.fillStyle = color.toString();
@@ -188,7 +188,7 @@ export default class LayoutDrawer {
         }
 
         //Draw static labels
-        let label = format(graphMin, this.chartDrawer.chart.percentage);
+        let label = this._formatValue(graphMin, this.chartDrawer.chart.percentage);
         if (graphValue2) {
             let color = new Color(this.chartDrawer.graphDrawers[0].color);
             color.a *= textColor.a / (this.opacity / 3 * 2);
@@ -198,27 +198,27 @@ export default class LayoutDrawer {
         this.context.fillText(label, 0, this.gl.canvas.height - margin);
 
         if (graphValue2) {
-            label = format(graphMin2, this.chartDrawer.chart.percentage);
+            label = this._formatValue(graphMin2, this.chartDrawer.chart.percentage);
             let color = new Color(this.chartDrawer.graphDrawers[1].color);
             color.a *= textColor.a / (this.opacity / 3 * 2);
             this.context.fillStyle = color.toString();
             this.context.textAlign = "right";
             this.context.fillText(label, this.gl.canvas.width, this.gl.canvas.height - margin);
         }
+    }
 
-        function format(number, isPercentage = false) {
-            //Format value
-            const percentage = isPercentage ? "%" : "";
-            const absolute = Math.abs(number);
-            if (absolute > 1000000000) {
-                return parseFloat((number / 1000000000).toFixed(2)) + "B";
-            } else if (absolute > 1000000) {
-                return parseFloat((number / 1000000).toFixed(2)) + "M";
-            } else if (absolute > 1000) {
-                return parseFloat((number / 1000).toFixed(1)) + "K";
-            } else {
-                return Math.round(number) + percentage;
-            }
+    _formatValue(number, isPercentage = false) {
+        //Format value
+        const percentage = isPercentage ? "%" : "";
+        const absolute = Math.abs(number);
+        if (absolute > 1000000000) {
+            return parseFloat((number / 1000000000).toFixed(2)) + "B";
+        } else if (absolute > 1000000) {
+            return parseFloat((number / 1000000).toFixed(2)) + "M";
+        } else if (absolute > 1000) {
+            return parseFloat((number / 1000).toFixed(1)) + "K";
+        } else {
+            return Math.round(number) + percentage;
         }
     }
 

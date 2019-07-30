@@ -80,8 +80,11 @@ export default class DateUtils {
         return date;
     }
 
-    static getReadableDuration(dateFrom, dateTo) {
-        const duration = Math.round((dateTo - dateFrom) / 1000);
+    /**
+     * Formats duration to human readable text
+     * @param {Number} duration Duration in seconds
+     */
+    static getReadableDuration(duration) {
         const hours = Math.floor(duration / 60 / 60);
         const minutes = Math.floor((duration - (60 * 60 * hours)) / 60);
         const seconds = Math.floor(duration - (60 * 60 * hours) - (60 * minutes));
