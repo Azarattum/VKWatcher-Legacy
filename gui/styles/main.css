@@ -1,17 +1,17 @@
 .page {
-    --color-android: hsl(147, 71%, 25%);
-    --color-iphone: hsl(0, 0%, 25%);
-    --color-ipad: hsl(184, 71%, 25%);
-    --color-mobile: hsl(36, 71%, 25%);
-    --color-wphone: hsl(0, 71%, 25%);
-    --color-windows: hsl(258, 71%, 25%);
-    --color-web: hsl(323, 71%, 25%);
-    --color-unknown: hsl(0, 0%, 0%);
+    --color-android: rgb(18, 109, 59);
+    --color-iphone: rgb(63, 63, 63);
+    --color-ipad: rgb(18, 102, 109);
+    --color-mobile: rgb(109, 72, 18);
+    --color-wphone: rgb(109, 18, 18);
+    --color-windows: rgb(45, 18, 109);
+    --color-web: rgb(109, 18, 74);
+    --color-unknown: rgb(0, 0, 0);
     --vertical-zoom: 1;
 }
 
 body {
-    --color-text: hsl(270, 5%, 25%);
+    --color-text: rgb(63, 60, 66);
     margin: 0px;
     font-family: Arial, Helvetica, sans-serif;
     overflow-x: hidden;
@@ -282,4 +282,8 @@ body {
     margin-right: 16px;
 
     cursor: pointer;
+}
+
+.tabcontent {
+    display: none;
 }

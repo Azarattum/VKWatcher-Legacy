@@ -1,7 +1,11 @@
+import DateUtils from "./utils.cls.js";
+import Day from "./day.cls.js";
+import Session from "./session.cls.js";
+
 /**
  * Represents user with its data
  */
-class User {
+export default class User {
     /**
      * Creates a user object
      * @param {String} name User's display name

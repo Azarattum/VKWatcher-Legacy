@@ -1,29 +1,41 @@
 /**
  * Main script
  */
+import Chart from "/libs/charts/scripts/element/element.js";
+import User from "./data/user.cls.js";
+import Session from "./data/session.cls.js";
 
-//Users array
-var users = [];
-//Selected user id
-var id = 0;
+import EmptyFilter from "./data/filters/empty.cls.js";
+import DeviceFilter from "./data/filters/device.cls.js";
+import PeriodFilter from "./data/filters/period.cls.js";
 
-function main() {
+import Drawer from "./drawer.cls.js";
+import Controller from "./controller.cls.js";
+import Designer from "./designer.cls.js";
+
+window.main = () => {
     load({
-        "sessions.json": "sessions"
+        "sessions.json": "sessions",
+        "libs/charts/shaders/bar.fsh": "fshaderBar",
+        "libs/charts/shaders/bar.vsh": "vshaderBar",
+        "libs/charts/shaders/layout.fsh": "fshaderLayout",
+        "libs/charts/shaders/layout.vsh": "vshaderLayout"
     }, (data) => {
         parseData(data);
-        Designer.initialize();
+        Designer.initialize(data, users[id]);
 
         const canvas = document.getElementsByClassName("report-render")[0];
-        window.drawer = new Drawer(canvas, users[id]);
-        window.controller = new Controller(drawer);
+        window.dataDrawer = new Drawer(canvas, users[id]);
+        window.controller = new Controller(dataDrawer);
 
         renderUser();
     });
 }
 
 function parseData(data) {
-    i = 0;
+    window.users = [];
+    window.id = 0;
+    let i = 0;
     //Iterate through all users in data
     for (const id in data["sessions"]) {
         const userData = data["sessions"][id];
@@ -51,14 +63,14 @@ function parseData(data) {
         user.addFilter(period);
         
         //Save user to an array
-        users.push(user);
+        window.users.push(user);
         document.getElementsByClassName("users")[0].innerHTML +=
             `<div class="button user" onclick="set(${i})">${userData.name}</div>`;
         i++;
     }
 }
 
-function renderUser() {
+window.renderUser = () => {
     //Get elements
     let range = $(".area-slider").data("ionRangeSlider");
     //Update labels on the page
@@ -71,8 +83,8 @@ function renderUser() {
     hash.set("empty", !users[id].getFilter("empty").enabled);
     hash.set("device", users[id].getFilter("device").device || -1);
     //Render drawer object
-    drawer.user = users[id];
-    drawer.render();
+    dataDrawer.user = users[id];
+    dataDrawer.render();
     //Update range selector
     const days = Object.keys(users[id].days);
     const period = users[id].getFilter("period");
@@ -85,7 +97,7 @@ function renderUser() {
             period.from = data.from;
             period.to = data.to;
             hash.set("period", (period.from - days[0] + 1) + "-" + (period.to - days[0] + 1));
-            drawer.render();
+            dataDrawer.render();
         }
     });
     //Update filter hash

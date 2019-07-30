@@ -30,13 +30,13 @@ function toggleEmptyFilter() {
         !document.getElementById("empty-filter").checked
     );
     hash.set("empty", document.getElementById("empty-filter").checked);
-    drawer.render();
+    dataDrawer.render();
 }
 
 function changeDeviceFilter(deviceId) {
     users[id].getFilter("device").device = +deviceId;
     hash.set("device", deviceId);
-    drawer.render();
+    dataDrawer.render();
 }
 
 function tab(eventArgs, tabId) { 
@@ -54,4 +54,4 @@ function tab(eventArgs, tabId) {
 
     document.getElementById(tabId).style.display = "block";
     eventArgs.currentTarget.className += " filled";
-  }
+}

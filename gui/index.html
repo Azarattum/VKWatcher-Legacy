@@ -7,24 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/overview.css">
+    <link rel="stylesheet" href="styles/chart.css">
     <link rel="stylesheet" href="styles/icons.css">
     <link rel="stylesheet" href="styles/rangeSlider.min.css">
+    <link rel="stylesheet" href="libs/charts/styles/main.css">
+    <!-- 3rd party libraries -->
     <script src="libs/jquery.min.js"></script>
     <script src="libs/rangeSlider.min.js"></script>
-    <script src="scripts/data/utils.cls.js"></script>
-    <script src="scripts/data/filters/filter.int.js"></script>
-    <script src="scripts/data/filters/empty.cls.js"></script>
-    <script src="scripts/data/filters/device.cls.js"></script>
-    <script src="scripts/data/filters/period.cls.js"></script>
-    <script src="scripts/data/session.cls.js"></script>
-    <script src="scripts/data/day.cls.js"></script>
-    <script src="scripts/data/user.cls.js"></script>
-    <script src="scripts/drawer.cls.js"></script>
-    <script src="scripts/hash.cls.js"></script>
-    <script src="scripts/designer.cls.js"></script>
-    <script src="scripts/controller.cls.js"></script>
+    <!-- Scripts -->
     <script src="scripts/interface.js"></script>
-    <script src="scripts/main.js"></script>
+    <script type="module" src="scripts/main.js"></script>
     <title>VKW Interface</title>
 </head>
 
@@ -99,11 +91,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="chart tabcontent" id="chart"></div>
-
+                <div class="chart tabcontent" id="chart">
+                    <div id="chart-container"></div>
                 </div>
-                <div class="analysis tabcontent" id="analysis"></div>
-                
+                <div class="analysis tabcontent" id="analysis">
+
                 </div>
             </div>
         </div>

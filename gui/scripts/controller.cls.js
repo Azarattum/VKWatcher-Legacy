@@ -1,7 +1,9 @@
+import DateUtils from "./data/utils.cls.js";
+
 /**
  * Responsible for handling all user controlls
  */
-class Controller {
+export default class Controller {
     constructor(drawer) {
         //#region Fields
         this.drawer = drawer;

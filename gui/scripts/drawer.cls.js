@@ -1,7 +1,7 @@
 /**
  * Responsible for drawing the date
  */
-class Drawer {
+export default class Drawer {
     /**
      * Creates a new drawer object
      * @param {Element} canvas HTML Canvas element

@@ -1,7 +1,9 @@
+import DateUtils from "./utils.cls.js";
+
 /**
  * Represents a day of sessions
  */
-class Day {
+export default class Day {
     /**
      * Creates a day object for storing sessions
      * @param {Date} date The date of the day (will be normalized)

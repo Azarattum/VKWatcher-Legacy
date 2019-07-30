@@ -1,7 +1,9 @@
+import IFilter from "./filter.int.js";
+
 /**
  * Filters sessions by device
  */
-class DeviceFilter extends IFilter {
+export default class DeviceFilter extends IFilter {
     constructor(id, device = null) {
         super(id);
         //#region Fields

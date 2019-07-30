@@ -1,7 +1,10 @@
+import IFilter from "./filter.int.js";
+import DateUtils from "../utils.cls.js";
+
 /**
  * Filters days by period
  */
-class PeriodFilter extends IFilter {
+export default class PeriodFilter extends IFilter {
     constructor(id, from = -Infinity, to = Infinity) {
         super(id);
         //#region Fields

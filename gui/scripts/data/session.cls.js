@@ -1,7 +1,9 @@
+import DateUtils from "./utils.cls.js";
+
 /**
  * Class represents single user's session
  */
-class Session {
+export default class Session {
     /**
      * Creates a new session object
      * @param {Number} from Session start in unix time

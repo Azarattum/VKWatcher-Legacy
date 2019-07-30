@@ -1,7 +1,7 @@
 /**
  * Class to work with URL hash
  */
-class Hash {
+export default class Hash {
     /**
      * Creates URL Hash object
      * @param {Object} defaults Default values for hash

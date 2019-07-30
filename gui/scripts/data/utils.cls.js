@@ -1,7 +1,7 @@
 /**
  * Utilities to work with dates
  */
-class DateUtils {
+export default class DateUtils {
     /**
      * Counts days between two dates. 
      * For expample it return 1 for Jan 4 & Jan 5, 0 for Jan 4 & Jan 4.

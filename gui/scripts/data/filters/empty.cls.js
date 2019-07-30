@@ -1,7 +1,9 @@
+import IFilter from "./filter.int.js";
+
 /**
  * Filters empty days
  */
-class EmptyFilter extends IFilter {
+export default class EmptyFilter extends IFilter {
     /**
      * Checks whether or not a day satisfies the filter
      * @param {Day} day Day for checking

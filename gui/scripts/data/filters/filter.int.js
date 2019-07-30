@@ -1,7 +1,7 @@
 /**
  * Interface for sessions and days filters
  */
-class IFilter {
+export default class IFilter {
     constructor(id) {
         //Interface exception
         if (new.target === IFilter) {
