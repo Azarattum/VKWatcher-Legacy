@@ -21,8 +21,8 @@ function set(i) {
     renderUser();
 }
 
-function open() {
-    window.open("https://vk.com/id" + users[id].id, '_blank').focus();
+function userProfile() {
+    window.open("https://vk.com/id" + window.users[id].id, '_blank').focus();
 }
 
 function toggleEmptyFilter() {
@@ -52,11 +52,11 @@ function tab(tabId, force = false) {
     }
 
     //Remove all fills
-    let tablinks = document.getElementsByClassName("tablinks");
+    let tablinks = document.getElementsByClassName("icon");
     for (const link of tablinks) {
         link.className = link.className.replace(" filled", "");
     }    
-    document.getElementsByClassName("tablinks icon " + tabId)[0].className += " filled";
+    document.getElementsByClassName("icon " + tabId)[0].className += " filled";
 
     if (tabId == "chart") {
         setTimeout(() => {

@@ -36,7 +36,7 @@ export default class Controller {
             const y = eventArgs.offsetY;
             let time = Math.round(y / ((drawer.viewport.height - height) / window.devicePixelRatio / oneDay) * 1000);
 
-            if (time > (oneDay * 1000) || time < 0 || eventArgs.type == "mouseleave") {
+            if (time > (oneDay * 1000) || time < 0 || eventArgs.type == "mouseleave" || y === undefined) {
                 selectionBlock.style.top = "-100px";
                 controller.time = null;
             } else {
@@ -80,6 +80,10 @@ export default class Controller {
                 return;
             }
             const day = days[dayIndex];
+            if (day === undefined) {
+                sessionBlock.style.opacity = 0;
+                return;
+            }
 
             const date = DateUtils.combineDate(day.date, controller.time);
             const session = day.getSession(date, true);

@@ -113,6 +113,7 @@
 }
 
 .analysis.icon {
+    display: block;
     margin-top: 4px;
     margin-left: 4px;
     width: 11px;

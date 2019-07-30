@@ -24,8 +24,8 @@
     <div class="page">
         <div class="report-window" ng-controller="report-controller">
             <div class="report-header">
-                <div class="user-name"></div>
-                <div class="user-id" onclick="open()"></div>
+                <div class="user-name">Loading...</div>
+                <div class="user-id" onclick="userProfile()"></div>
                 <div class="buttons">
                     <div class="button range tab-overview tabcontent">
                         &#x2699;
@@ -70,14 +70,14 @@
             </div>
             <div class="report-items">
                 <div class="tablinks">
-                    <div class="tab">
-                        <div class="tablinks icon overview" onclick="tab('overview')"></div>
+                    <div class="tab" onclick="tab('overview')">
+                        <div class="icon overview"></div>
                     </div>
-                    <div class="tab">
-                        <div class="tablinks icon chart" onclick="tab('chart')"><i></i></div>
+                    <div class="tab" onclick="tab('chart')">
+                        <div class="icon chart"><i></i></div>
                     </div>
-                    <div class="tab">
-                        <div class="tablinks icon analysis" onclick="tab('analysis')"></div>
+                    <div class="tab" onclick="tab('analysis')">
+                        <div class="icon analysis"></div>
                     </div>
                 </div>
                 <div class="tab-overview tabcontent overview">
