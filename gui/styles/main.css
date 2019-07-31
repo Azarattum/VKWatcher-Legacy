@@ -116,6 +116,7 @@ body {
 }
 
 .report-header>.user-id {
+    height: 0.3em;
     margin-top: calc(2.5em + 16px);
     margin-left: -8px;
     font-size: 0.3em;
