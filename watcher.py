@@ -63,14 +63,17 @@ def get_offline(id):
         "v": "5.101"
     }).json()["response"][0]
 
-    if int(response["online"]) == 1:
+    if ("online" in response) and (int(response["online"]) == 1):
         return None
 
     if ("last_seen" in response):
         offline_time = int(response["last_seen"]["time"])
-        platform = int(response["last_seen"]["platform"])
     else:
         offline_time = int(get_time())
+
+    if ("platform" in response):
+        platform = int(response["last_seen"]["platform"])
+    else:
         platform = 0
 
     return (offline_time, platform)
