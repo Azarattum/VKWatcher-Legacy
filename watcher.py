@@ -68,12 +68,12 @@ def get_offline(id):
 
     if ("last_seen" in response):
         offline_time = int(response["last_seen"]["time"])
+        if ("platform" in response["last_seen"]):
+            platform = int(response["last_seen"]["platform"])
+        else:
+            platform = 0
     else:
         offline_time = int(get_time())
-
-    if ("platform" in response):
-        platform = int(response["last_seen"]["platform"])
-    else:
         platform = 0
 
     return (offline_time, platform)
