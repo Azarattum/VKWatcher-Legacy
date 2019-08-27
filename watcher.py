@@ -61,7 +61,12 @@ def get_offline(id):
         "user_ids": str(id),
         "fields": "last_seen,online",
         "v": "5.101"
-    }).json()["response"][0]
+    }).json()
+
+    if ("response" in response):
+        response = response["response"][0]
+    else:
+        return None
 
     if ("online" in response) and (int(response["online"]) == 1):
         return None
